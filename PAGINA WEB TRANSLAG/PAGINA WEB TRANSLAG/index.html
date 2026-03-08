@@ -1,0 +1,2817 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TRANSPORTES Y SERVICIOS LAGO C.A (TRANSLAG)</title>
+    <!-- Favicon (Icono en la pestaña del navegador) -->
+    <link rel="icon" type="image/png" href="images/logo.png">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            /* Modernized Color Palette */
+            --primary-dark: #0f172a;
+            /* Deep blue/slate */
+            --primary-blue: #0284c7;
+            /* Vibrant blue */
+            --accent-cyan: #06b6d4;
+            /* Bright cyan */
+            --accent-glow: rgba(6, 182, 212, 0.5);
+            --surface-light: #f8fafc;
+            --surface-white: #ffffff;
+            --text-main: #334155;
+            --text-light: #64748b;
+            --white: #ffffff;
+            --glass-bg: rgba(255, 255, 255, 0.95);
+            --glass-border: 1px solid rgba(255, 255, 255, 0.2);
+            --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+            --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+
+            /* Compatibility Aliases */
+            --primary-dark-blue: var(--primary-dark);
+            --secondary-medium-blue: var(--primary-blue);
+            --dark-text: var(--text-main);
+            --light-gray: var(--surface-light);
+            --medium-gray: #cbd5e1;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--surface-light);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--primary-blue);
+            border-radius: 5px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--accent-cyan);
+        }
+
+        body {
+            font-family: 'Open Sans', sans-serif;
+            color: var(--text-main);
+            line-height: 1.6;
+            background-color: var(--surface-light);
+            overflow-x: hidden;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(to bottom, rgba(0, 0, 0, 0.8) 0%, transparent 100%);
+            /* Sombreado antes del scroll */
+            backdrop-filter: none;
+            -webkit-backdrop-filter: none;
+            color: var(--white);
+            padding: 10px 0;
+            /* Padding medio */
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+            box-shadow: none;
+            transition: all 0.3s ease;
+            border-bottom: none;
+        }
+
+        .header-container {
+            max-width: 1300px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 30px;
+            /* Ajuste del padding negativo incorrecto */
+            position: relative;
+            /* Enabled for absolute positioning of nav */
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .logo img {
+            height: 70px;
+            /* Tamaño real pequeño para no empujar la barra */
+            border-radius: 7%;
+            transition: transform 0.3s ease;
+            transform: scale(1.4);
+            /* Escalar visualmente sin afectar la caja */
+            transform-origin: left center;
+        }
+
+        .logo h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.2rem;
+            color: var(--white);
+            font-weight: 600;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        nav {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        nav a {
+            color: #000;
+            /* Black text on load */
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1rem;
+            transition: color 0.3s ease;
+            position: relative;
+            white-space: nowrap;
+            /* Prevent wrapping */
+        }
+
+        /* The header keeps its shadow, no solid background is added on scroll */
+        header.scrolled nav a {
+            color: var(--white) !important;
+        }
+
+        nav a:hover {
+            color: #0000FF !important;
+            /* Blue on hover */
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background-color: var(--accent-cyan);
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        /* Menu Toggle (Hamburger) */
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            z-index: 1001;
+            /* Above nav */
+            padding: 5px;
+        }
+
+        .menu-toggle .bar {
+            width: 25px;
+            height: 3px;
+            background-color: var(--white);
+            margin: 4px 0;
+            transition: 0.3s;
+            border-radius: 3px;
+        }
+
+        /* Scrolled state for hamburger bars */
+        header.scrolled .menu-toggle .bar {
+            background-color: var(--white);
+        }
+
+        /* Hamburger animation */
+        .menu-toggle.is-active .bar:nth-child(1) {
+            transform: translateY(11px) rotate(45deg);
+        }
+
+        .menu-toggle.is-active .bar:nth-child(2) {
+            opacity: 0;
+        }
+
+        .menu-toggle.is-active .bar:nth-child(3) {
+            transform: translateY(-11px) rotate(-45deg);
+        }
+
+        /* Preloader */
+        #preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--primary-dark);
+            z-index: 9999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: opacity 0.5s ease-out, visibility 0.5s ease-out;
+        }
+
+        .loader {
+            width: 50px;
+            height: 50px;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: var(--accent-cyan);
+            animation: spin 1s ease-in-out infinite;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        body.loaded #preloader {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        /* 3D Tilt Effect Base */
+        .tilt-card {
+            transition: transform 0.1s ease-out;
+            /* Super fast for tilt, overridden by hover for smoothness */
+            transform-style: preserve-3d;
+            perspective: 1000px;
+        }
+
+        /* Hero Section */
+        .hero {
+            background-image: url("images/1.jpg");
+            height: 80vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: var(--white);
+            position: relative;
+            padding-top: 80px;
+            /* Para compensar el header fijo */
+            background-attachment: fixed;
+            /* Clave para el efecto parallax */
+            background-position: center bottom;
+            /* Centrar inferior para ver más los camiones */
+            background-repeat: no-repeat;
+            background-size: cover;
+            overflow: hidden;
+            /* Ensure particles don't overflowing */
+            padding-top: 0;
+            /* Important: remove top padding so background shows behind header */
+        }
+
+        #hero-particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            /* Behind content but above background image */
+            pointer-events: none;
+            /* Allow clicking through */
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(15, 23, 42, 0.9) 0%, rgba(15, 23, 42, 0.7) 100%);
+            z-index: -1;
+            /* Ensure it stays behind particles if needed, but particles need to be visible. Actually particles should be on top of this overlay or blend with it. Let's put particles at z-index 0 and content at z-index 1. Ideally particles are ON TOP of the dark overlay for visibility */
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 900px;
+            padding: 0 20px;
+        }
+
+        .hero-content h2 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 4rem;
+            margin-bottom: 20px;
+            line-height: 1.1;
+            font-weight: 800;
+            text-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+            letter-spacing: -1px;
+        }
+
+        .hero-content p {
+            font-size: 1.3rem;
+            margin-bottom: 30px;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-button {
+            display: inline-block;
+            width: 180px;
+            /* Fixed width for exact same size */
+            padding: 10px 0;
+            /* Vertical padding only, horiz determined by width */
+            text-align: center;
+            /* Center text */
+            font-size: 0.85rem;
+            /* Smaller font */
+            font-weight: 700;
+            color: var(--white);
+            background: linear-gradient(90deg, var(--primary-blue), var(--accent-cyan));
+            border: none;
+            border-radius: 50px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 10px rgba(0, 209, 255, 0.4);
+            /* Subtle Glow */
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin: 0 10px;
+            /* Space between buttons */
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, var(--accent-cyan), var(--primary-blue));
+            opacity: 0;
+            z-index: -1;
+            transition: opacity 0.3s ease;
+            border-radius: 50px;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 0 25px rgba(0, 209, 255, 0.8);
+            /* Stronger Glow on Hover */
+        }
+
+        .cta-button:hover::before {
+            opacity: 1;
+        }
+
+        /* General Section Styling */
+        .section {
+            padding: 80px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
+        }
+
+        /* Hero Particles Canvas */
+        .hero canvas {
+            display: block;
+            /* vertical-align: bottom; */
+        }
+
+        .section.animate-in {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .section-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2.5rem;
+            color: var(--primary-dark);
+            text-align: center;
+            margin-bottom: 60px;
+            position: relative;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 4px;
+            background: linear-gradient(to right, var(--primary-blue), var(--accent-cyan));
+            margin: 20px auto 0;
+            border-radius: 2px;
+        }
+
+        /* About Us Section */
+        .about-content {
+            display: flex;
+            gap: 40px;
+            align-items: flex-start;
+            /* Changed from center to align top with text */
+        }
+
+        .about-text {
+            flex: 1;
+        }
+
+        .about-text h3 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.8rem;
+            color: var(--secondary-medium-blue);
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        .about-text p {
+            margin-bottom: 15px;
+            font-size: 1.05rem;
+            color: var(--dark-text);
+        }
+
+        .about-image {
+            flex: 1;
+            text-align: center;
+            margin-top: 115px;
+            /* Pushes the carousel down to align with the paragraph text */
+        }
+
+        /* Partners Section */
+        .partners-section {
+            background-color: var(--white);
+            padding: 50px 20px;
+            text-align: center;
+            border-top: 1px solid rgba(0, 0, 0, 0.05);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .partners-logos {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            gap: 40px 60px;
+            max-width: 1000px;
+            margin: 40px auto 0;
+        }
+
+        .partner-logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-light);
+            opacity: 0.6;
+            transition: all 0.3s ease;
+            filter: grayscale(100%);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .partner-logo i {
+            font-size: 2rem;
+        }
+
+        .partner-logo:hover {
+            color: var(--primary-blue);
+            opacity: 1;
+            filter: grayscale(0%);
+            transform: scale(1.05);
+        }
+
+        /* Carousel Styles for About Section */
+        .carousel-container {
+            position: relative;
+            max-width: 100%;
+            overflow: hidden;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .carousel-slide {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .carousel-slide img {
+            width: 100%;
+            flex-shrink: 0;
+            /* Prevent images from shrinking */
+            height: 350px;
+            /* Fixed height for carousel images */
+            object-fit: cover;
+            /* Cover the area without distorting aspect ratio */
+        }
+
+        .carousel-prev,
+        .carousel-next {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            cursor: pointer;
+            font-size: 1.5rem;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+            z-index: 10;
+        }
+
+        .carousel-prev:hover,
+        .carousel-next:hover {
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+
+        .carousel-prev {
+            left: 10px;
+        }
+
+        .carousel-next {
+            right: 10px;
+        }
+
+        .carousel-dots {
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 8px;
+            z-index: 10;
+        }
+
+        .dot {
+            height: 12px;
+            width: 12px;
+            background-color: rgba(255, 255, 255, 0.5);
+            border-radius: 50%;
+            display: inline-block;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        .dot.active,
+        .dot:hover {
+            background-color: var(--accent-cyan);
+            transform: scale(1.2);
+        }
+
+        /* Elegant Carousel Base */
+        .elegant-carousel {
+            position: relative;
+            max-width: 1000px;
+            /* Wider for elegance */
+            margin: 0 auto;
+            overflow: hidden;
+            border-radius: 15px;
+            /* Softer corners */
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            /* Deep elegant shadow */
+            background-color: var(--primary-dark);
+            /* Aspect ratio approx 16:9 for great presentation without being too tall */
+            aspect-ratio: 16/9;
+            /* WebKit overflow fix */
+            transform: translateZ(0);
+            -webkit-mask-image: -webkit-radial-gradient(white, black);
+            mask-image: radial-gradient(white, black);
+        }
+
+        .elegant-carousel-track {
+            display: flex;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+            will-change: transform;
+        }
+
+        .elegant-carousel-slide {
+            flex: 0 0 100%;
+            width: 100%;
+            min-width: 100%;
+            height: 100%;
+            position: relative;
+        }
+
+        .elegant-carousel-slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            /* Ensures images fill elegant box nicely */
+            display: block;
+            pointer-events: none;
+            /* helps with touch dragging */
+            /* Image Optimizations for HD look */
+            image-rendering: -webkit-optimize-contrast;
+            image-rendering: crisp-edges;
+            transform: translateZ(0);
+        }
+
+        /* Specific rule for projects carousel to handle vertical images better */
+        #projectsCarousel .elegant-carousel-slide img {
+            object-fit: contain;
+            background-color: var(--primary-dark);
+            /* Dark background to fill empty space elegantly */
+            box-shadow: inset 0 0 50px rgba(0, 0, 0, 0.5);
+            /* Inner shadow for depth */
+        }
+
+        /* Gradient overlay for better text readability and premium feel if text was added over it */
+        .elegant-carousel-slide::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.3) 0%, transparent 40%);
+            pointer-events: none;
+        }
+
+        .ec-nav-button {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            color: var(--white);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 10;
+        }
+
+        .ec-nav-button:hover {
+            background: var(--accent-cyan);
+            border-color: var(--accent-cyan);
+            transform: translateY(-50%) scale(1.1);
+            box-shadow: 0 0 15px var(--accent-glow);
+        }
+
+        .ec-prev {
+            left: 15px;
+        }
+
+        .ec-next {
+            right: 15px;
+        }
+
+        .ec-dots-container {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
+            z-index: 10;
+            padding: 8px 15px;
+            background: rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(4px);
+            border-radius: 20px;
+        }
+
+        .ec-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.4);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .ec-dot.active {
+            background-color: var(--accent-cyan);
+            transform: scale(1.3);
+            box-shadow: 0 0 8px var(--accent-glow);
+        }
+
+        /* Intro Text for Sections */
+        .section-intro-text {
+            text-align: center;
+            max-width: 800px;
+            margin: -30px auto 40px;
+            /* pulls up slightly from title */
+            font-size: 1.1rem;
+            color: var(--text-light);
+            line-height: 1.8;
+        }
+
+        /* Values Section */
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            text-align: center;
+        }
+
+        .value-item {
+            background-color: var(--surface-white);
+            padding: 40px 30px;
+            border-radius: 20px;
+            box-shadow: var(--shadow-md);
+            transition: all 0.3s ease;
+            border: 1px solid rgba(0, 0, 0, 0.03);
+        }
+
+        .value-item:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--accent-cyan);
+        }
+
+        .value-item i {
+            font-size: 3.5rem;
+            background: linear-gradient(135deg, var(--primary-blue), var(--accent-cyan));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 25px;
+        }
+
+        .value-item h3 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.5rem;
+            color: var(--secondary-medium-blue);
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .value-item p {
+            font-size: 0.95rem;
+            color: var(--dark-text);
+        }
+
+        /* Services Section */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        /* Center the 4th card symmetrically on desktop layouts */
+        @media (min-width: 992px) {
+            .services-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            .services-grid .service-card:nth-child(4) {
+                grid-column: 2;
+            }
+        }
+
+        .service-card {
+            background-color: var(--surface-white);
+            border-radius: 20px;
+            padding: 40px 30px;
+            text-align: center;
+            box-shadow: var(--shadow-md);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(0, 0, 0, 0.03);
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(to right, var(--primary-blue), var(--accent-cyan));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .service-card:hover::before {
+            opacity: 1;
+        }
+
+        .service-card i {
+            font-size: 3rem;
+            color: var(--accent-cyan);
+            margin-bottom: 20px;
+        }
+
+        .service-card h3 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.5rem;
+            color: var(--secondary-medium-blue);
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .service-card p {
+            font-size: 0.95rem;
+            color: var(--dark-text);
+        }
+
+        /* Testimonials Section */
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .testimonial-card {
+            background-color: var(--surface-white);
+            padding: 40px 30px;
+            border-radius: 20px;
+            box-shadow: var(--shadow-md);
+            text-align: center;
+            border: 1px solid rgba(0, 0, 0, 0.03);
+            position: relative;
+        }
+
+        .testimonial-card::before {
+            content: '"';
+            font-family: 'Georgia', serif;
+            font-size: 5rem;
+            color: rgba(6, 182, 212, 0.1);
+            position: absolute;
+            top: 10px;
+            left: 20px;
+            line-height: 1;
+        }
+
+        .testimonial-card p {
+            font-style: italic;
+            margin-bottom: 15px;
+            color: var(--dark-text);
+        }
+
+        .testimonial-card .author {
+            font-weight: 600;
+            color: var(--secondary-medium-blue);
+        }
+
+        /* Certifications Section */
+        .certifications-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 40px;
+            margin-top: 40px;
+        }
+
+        .certification-item {
+            text-align: center;
+            max-width: 150px;
+        }
+
+        .certification-item img {
+            max-width: 100px;
+            height: auto;
+            margin-bottom: 10px;
+            filter: grayscale(100%);
+            /* Para que se integren mejor */
+            transition: filter 0.3s ease;
+        }
+
+        .certification-item img:hover {
+            filter: grayscale(0%);
+        }
+
+        .certification-item p {
+            font-size: 0.9rem;
+            color: var(--dark-text);
+        }
+
+        /* FAQ Section */
+        .faq-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            margin-bottom: 15px;
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+            transition: box-shadow 0.3s ease, transform 0.3s ease;
+        }
+
+        .faq-item.active {
+            box-shadow: var(--shadow-md);
+            border-color: var(--accent-cyan);
+            background-color: var(--white);
+        }
+
+        .faq-question {
+            background-color: var(--surface-white);
+            padding: 20px 25px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+            color: var(--primary-dark);
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+        }
+
+        .faq-question:hover {
+            background-color: var(--surface-light);
+            color: var(--primary-blue);
+        }
+
+        .faq-item.active .faq-question {
+            background-color: var(--primary-blue);
+            color: var(--white);
+        }
+
+        .faq-question .icon {
+            font-size: 1.2rem;
+            transition: transform 0.3s ease;
+        }
+
+        .faq-answer {
+            padding: 0 25px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out, padding 0.3s ease-out, opacity 0.3s ease;
+            background-color: var(--white);
+            color: var(--text-main);
+            opacity: 0;
+            border-top: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .faq-item.active .faq-answer {
+            max-height: 2000px;
+            /* Increased significantly to prevent cutoff */
+            padding: 20px 25px;
+            opacity: 1;
+        }
+
+        .faq-item.active .faq-question .icon {
+            transform: rotate(180deg);
+        }
+
+        /* Why Choose Us Section */
+        .why-choose-us-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        /* Center the 4th card symmetrically on desktop layouts */
+        @media (min-width: 992px) {
+            .why-choose-us-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            .why-choose-us-grid .advantage-card:nth-child(4) {
+                grid-column: 2;
+            }
+        }
+
+        .advantage-card {
+            background-color: var(--surface-white);
+            border-left: 5px solid var(--accent-cyan);
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: var(--shadow-md);
+            transition: transform 0.3s ease;
+        }
+
+        .advantage-card:hover {
+            transform: translateX(10px);
+        }
+
+        /* Contact Section */
+        .contact-content {
+            display: flex;
+            gap: 40px;
+            flex-wrap: wrap;
+        }
+
+        .contact-info,
+        .contact-form {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .contact-info h3,
+        .contact-form h3 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.8rem;
+            color: var(--primary-dark);
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .contact-info p {
+            margin-bottom: 10px;
+            font-size: 1.05rem;
+            color: var(--text-light);
+        }
+
+        .contact-info ul {
+            list-style: none;
+            padding: 0;
+            margin-top: 20px;
+        }
+
+        .contact-info ul li {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            font-size: 1.05rem;
+            color: var(--text-main);
+        }
+
+        .contact-info ul li i {
+            color: var(--accent-cyan);
+            font-size: 1.3rem;
+            width: 25px;
+            text-align: center;
+        }
+
+        .contact-form form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            background: var(--surface-white);
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: var(--shadow-md);
+        }
+
+        .contact-form label {
+            font-weight: 600;
+            color: var(--primary-dark);
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        .contact-form input,
+        .contact-form textarea,
+        .contact-form select {
+            padding: 15px;
+            border: 1px solid black;
+            /* Finas líneas negras como solicitado */
+            background-color: var(--surface-light);
+            border-radius: 8px;
+            font-size: 1rem;
+            width: 100%;
+            transition: all 0.3s ease;
+            font-family: inherit;
+        }
+
+        .contact-form input:focus,
+        .contact-form textarea:focus,
+        .contact-form select:focus {
+            outline: none;
+            border-color: var(--primary-blue);
+            background-color: var(--white);
+            box-shadow: 0 0 0 4px rgba(2, 132, 199, 0.1);
+        }
+
+        .contact-form textarea {
+            resize: vertical;
+            min-height: 150px;
+        }
+
+        .contact-form button {
+            background: linear-gradient(135deg, var(--primary-blue), var(--accent-cyan));
+            color: var(--white);
+            padding: 16px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(2, 132, 199, 0.3);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .contact-form button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(2, 132, 199, 0.5);
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--primary-dark);
+            color: var(--white);
+            padding: 60px 20px;
+            text-align: center;
+            font-size: 0.95rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-links {
+            margin-bottom: 30px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .footer-links a {
+            color: var(--text-light);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent-cyan);
+        }
+
+        .social-links {
+            margin-top: 20px;
+        }
+
+        .social-links a {
+            color: var(--white);
+            font-size: 1.5rem;
+            margin: 0 10px;
+            transition: color 0.3s ease;
+        }
+
+        .social-links a:hover {
+            color: var(--accent-cyan);
+        }
+
+        /* Floating CTA Button */
+        .floating-cta {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background-color: var(--accent-cyan);
+            color: var(--white);
+            padding: 15px 20px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .floating-cta:hover {
+            background-color: #00a0b3;
+            transform: translateY(-3px);
+        }
+
+        /* Chatbot Styles */
+        .floating-chatbot-button {
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
+            /* Cambiado a la izquierda para no chocar con el CTA */
+            background: linear-gradient(135deg, var(--primary-blue), var(--accent-cyan));
+            color: var(--white);
+            padding: 15px 20px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            box-shadow: 0 4px 15px rgba(2, 132, 199, 0.3);
+            transition: all 0.3s ease;
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border: none;
+            cursor: pointer;
+        }
+
+        .floating-chatbot-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(2, 132, 199, 0.5);
+        }
+
+        .chatbot-container {
+            position: fixed;
+            bottom: 100px;
+            /* Ajustar para que esté por encima del botón */
+            left: 30px;
+            /* Alineado con el botón */
+            width: 350px;
+            height: 450px;
+            background-color: var(--white);
+            border-radius: 10px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+            display: flex;
+            flex-direction: column;
+            z-index: 1001;
+            overflow: hidden;
+            transform: translateY(20px);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .chatbot-container.active {
+            transform: translateY(0);
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .chatbot-header {
+            background-color: var(--primary-dark-blue);
+            color: var(--white);
+            padding: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-family: 'Montserrat', sans-serif;
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+        }
+
+        .chatbot-header h3 {
+            margin: 0;
+            font-size: 1.2rem;
+        }
+
+        .close-chatbot-button {
+            background: none;
+            border: none;
+            color: var(--white);
+            font-size: 1.8rem;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .close-chatbot-button:hover {
+            color: var(--accent-cyan);
+        }
+
+        .chatbot-messages {
+            flex-grow: 1;
+            padding: 15px;
+            overflow-y: auto;
+            background-color: var(--light-gray);
+            border-bottom: 1px solid var(--medium-gray);
+            display: flex;
+            /* Para que los mensajes se alineen correctamente */
+            flex-direction: column;
+        }
+
+        .message {
+            margin-bottom: 10px;
+            padding: 10px 15px;
+            border-radius: 15px;
+            max-width: 80%;
+            word-wrap: break-word;
+        }
+
+        .user-message {
+            background-color: var(--accent-cyan);
+            color: var(--white);
+            align-self: flex-end;
+            margin-left: auto;
+            border-bottom-right-radius: 2px;
+        }
+
+        .bot-message {
+            background-color: var(--medium-gray);
+            color: var(--dark-text);
+            align-self: flex-start;
+            margin-right: auto;
+            border-bottom-left-radius: 2px;
+        }
+
+        .chatbot-input {
+            display: flex;
+            padding: 15px;
+            background-color: var(--white);
+            border-bottom-left-radius: 10px;
+            border-bottom-right-radius: 10px;
+        }
+
+        .chatbot-input input {
+            flex-grow: 1;
+            padding: 10px;
+            border: 1px solid var(--medium-gray);
+            border-radius: 20px;
+            margin-right: 10px;
+            font-size: 1rem;
+        }
+
+        .chatbot-input button {
+            background-color: var(--accent-cyan);
+            color: var(--white);
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .chatbot-input button:hover {
+            background-color: #00a0b3;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .hero-content h2 {
+                font-size: 2.8rem;
+            }
+
+            .hero-content p {
+                font-size: 1.1rem;
+            }
+
+            .about-content {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .about-image {
+                margin-top: 30px;
+            }
+
+            .fleet-tab-content.active {
+                /* Ensure grid adapts */
+                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            }
+
+            /* Adjust carousel image height for smaller screens */
+            .carousel-slide img {
+                height: 300px;
+            }
+
+            .lightbox-carousel-slide img {
+                height: 350px;
+                /* Adjust height for smaller screens */
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-container {
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+                padding: 0 20px;
+                gap: 0;
+            }
+
+            .logo img {
+                height: 50px;
+            }
+
+            .menu-toggle {
+                display: flex;
+            }
+
+            nav {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                /* hide it initially offscreen to the right */
+                width: 70%;
+                height: 100vh;
+                background-color: var(--primary-dark);
+                backdrop-filter: blur(10px);
+                -webkit-backdrop-filter: blur(10px);
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                transition: 0.4s ease-in-out;
+                z-index: 1000;
+                transform: none;
+                /* remove previous transform */
+                box-shadow: -5px 0 15px rgba(0, 0, 0, 0.5);
+                left: auto;
+                /* override left from desktop */
+            }
+
+            nav.active {
+                right: 0;
+            }
+
+            nav ul {
+                flex-direction: column;
+                gap: 30px;
+                text-align: center;
+                flex-wrap: nowrap;
+            }
+
+            nav a {
+                color: var(--white) !important;
+                font-size: 1.2rem;
+                font-weight: 600;
+            }
+
+
+            .logo h1 {
+                font-size: 1.5rem;
+            }
+
+            .hero {
+                height: 55vh;
+                /* Al hacerla menos alta, la imagen se acerca más y corta menos la camioneta */
+                min-height: 480px;
+                background-attachment: scroll;
+                /* Fix for mobile background zoom/disappearance */
+                background-position: 15% bottom;
+                /* Alineado para resaltar mejor las llantas de la primera camioneta */
+            }
+
+            .hero-content h2 {
+                font-size: 2.2rem;
+            }
+
+            .hero-content p {
+                font-size: 1rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .about-text h3,
+            .contact-info h3,
+            .contact-form h3 {
+                font-size: 1.5rem;
+            }
+
+            .services-grid,
+            .why-choose-us-grid,
+            .values-grid,
+            .projects-grid,
+            .testimonials-grid {
+                grid-template-columns: 1fr;
+            }
+
+            /* Responsive Design Elegante Carousel */
+            .elegant-carousel {
+                aspect-ratio: 4/3;
+                /* Taller on mobile to fill screen better */
+                max-width: 95%;
+                border-radius: 10px;
+            }
+
+            .ec-nav-button {
+                width: 35px;
+                height: 35px;
+                font-size: 1rem;
+            }
+
+            .ec-dots-container {
+                bottom: 10px;
+                padding: 5px 10px;
+            }
+
+            .ec-dot {
+                width: 8px;
+                height: 8px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo h1 {
+                font-size: 1.3rem;
+            }
+
+            nav a {
+                font-size: 0.9rem;
+            }
+
+            .hero-content h2 {
+                font-size: 1.8rem;
+            }
+
+            .hero-content p {
+                font-size: 0.9rem;
+            }
+
+            .cta-button {
+                display: block;
+                /* Para que tomen todo el ancho o se alineen fácil */
+                width: 80%;
+                /* Ancho uniforme en móviles */
+                max-width: 250px;
+                margin: 10px auto;
+                /* Centrados y con separación vertical */
+                padding: 12px 0;
+                font-size: 0.9rem;
+            }
+
+            .floating-cta {
+                bottom: 15px;
+                right: 15px;
+                padding: 10px 15px;
+                font-size: 0.8rem;
+            }
+
+            .floating-chatbot-button {
+                bottom: 15px;
+                left: 15px;
+                padding: 10px 15px;
+                font-size: 0.8rem;
+            }
+
+            .contact-form {
+                padding: 20px;
+            }
+
+            .contact-form input,
+            .contact-form textarea,
+            .contact-form select {
+                padding: 12px;
+                font-size: 0.9rem;
+            }
+
+            .section-title {
+                font-size: 1.8rem;
+            }
+
+            .section {
+                padding: 60px 15px;
+            }
+
+            /* Adjust carousel image height for smaller screens */
+            .carousel-slide img {
+                height: 200px;
+            }
+
+            .lightbox-carousel-slide img {
+                height: 220px;
+                /* Further adjust height for very small screens */
+            }
+        }
+
+        /* Animaciones de entrada para secciones */
+        .section.animate-in {
+            animation: fadeInSlideUp 1s ease-out forwards;
+        }
+
+        @keyframes fadeInSlideUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+    <!-- Font Awesome para iconos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+
+
+    <!-- Header -->
+    <header id="main-header">
+        <div class="header-container">
+            <div class="logo">
+                <img src="images/logo.png" alt="Logo TRANSLAG">
+                <h1></h1>
+            </div>
+            <!-- Toggle Hamburger Menu -->
+            <div class="menu-toggle" id="mobile-menu">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+            <nav id="navbar">
+                <ul class="nav-menu">
+                    <li><a href="#home">Inicio</a></li>
+                    <li><a href="#about">Quiénes Somos</a></li>
+                    <li><a href="#services">Servicios</a></li>
+                    <li><a href="#fleet">Nuestra Flota</a></li>
+                    <li><a href="#projects">Proyectos</a></li>
+                    <li><a href="#certifications">Certificaciones</a></li>
+                    <li><a href="#faq">FAQ</a></li>
+                    <li><a href="#contact">Contacto</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h2>TRANSPORTES Y SERVICIOS LAGO C.A</h2>
+            <p>Soluciones integrales para maquinaria pesada, vehículos y proyectos de gran envergadura en toda
+                Venezuela.</p>
+            <a href="#services" class="cta-button">Nuestros Servicios</a>
+            <a href="#contact" class="cta-button">Contáctanos</a>
+        </div>
+        <canvas id="hero-particles"></canvas>
+    </section>
+
+    <!-- Partners / Trusted By Section -->
+    <section class="partners-section">
+        <h2 class="section-title" style="margin-bottom: 20px; font-size: 2rem;">Confían en Nosotros</h2>
+        <p class="section-subtitle">Empresas líderes que han depositado su confianza en nuestra logística.</p>
+        <div class="partners-logos">
+            <!-- Placeholders for Partner Logos using FontAwesome for demo -->
+            <div class="partner-logo"><i class="fas fa-building"></i> EMPRESA UNO</div>
+            <div class="partner-logo"><i class="fas fa-industry"></i> INDUSTRIAS LARA</div>
+            <div class="partner-logo"><i class="fas fa-oil-can"></i> PETRO ORIENTE</div>
+            <div class="partner-logo"><i class="fas fa-helmet-safety"></i> CONSTRUCTORA ZULIA</div>
+            <div class="partner-logo"><i class="fas fa-ship"></i> NAVIERA ANDINA</div>
+        </div>
+    </section>
+
+    <!-- About Us Section (Sección Rellenable 1) -->
+    <section class="section" id="about">
+        <h2 class="section-title">QUIÉNES SOMOS</h2>
+        <div class="about-content">
+            <div class="about-text">
+                <h3>Experiencia y Compromiso en Cada Proyecto</h3>
+                <p><strong>TRANSPORTES Y SERVICOS LAGO,C.A (TRANSLAG)</strong> es una empresa fundada en el año 2006 con
+                    mas de 17 años en la actividad económica y productiva
+                    nacional, ejecutando trabajos en las áreas de servicios, mantenimiento y construcción civil,
+                    mecánica y eléctrica, todas las actividades se desarrollan con personal altamente capacitado, bajo
+                    los estándares de Seguridad, Higiene y Ambiente así como de Control y Gestión de la Calidad,
+                    logrando brindar resultados que garantizan el cumplimiento de las exigencias y expectativas de
+                    nuestros clientes. Es de resaltar que en TRANSLAG, C.A., tenemos la capacidad para operar en
+                    cualquier parte del país, contando con todas las permisologías ambientales, y laborales vigentes.
+                </p>
+
+            </div>
+            <div class="about-image">
+                <div class="elegant-carousel" id="aboutCarousel">
+                    <div class="elegant-carousel-track">
+                        <div class="elegant-carousel-slide"><img src="images/about/1.jpg" alt="Quiénes Somos 1"></div>
+                        <div class="elegant-carousel-slide"><img src="images/about/2.jpg" alt="Quiénes Somos 2"></div>
+                        <div class="elegant-carousel-slide"><img src="images/about/3.jpg" alt="Quiénes Somos 3"></div>
+                        <div class="elegant-carousel-slide"><img src="images/about/4.jpg" alt="Quiénes Somos 4"></div>
+                        <div class="elegant-carousel-slide"><img src="images/about/5.jpg" alt="Quiénes Somos 5"></div>
+                        <div class="elegant-carousel-slide"><img src="images/about/6.jpg" alt="Quiénes Somos 6"></div>
+                        <div class="elegant-carousel-slide"><img src="images/about/7.jpg" alt="Quiénes Somos 7"></div>
+                        <div class="elegant-carousel-slide"><img src="images/about/8.jpg" alt="Quiénes Somos 8"></div>
+                        <div class="elegant-carousel-slide"><img src="images/about/9.jpg" alt="Quiénes Somos 9"></div>
+                        <div class="elegant-carousel-slide"><img src="images/about/10.jpg" alt="Quiénes Somos 10"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Misión y Visión Section -->
+    <hr
+        style="border: none; height: 1px; background: linear-gradient(to right, transparent, var(--medium-gray), transparent); margin: 60px auto 0; width: 80%;">
+    <section class="section" id="mision-vision"
+        style="background-color: var(--surface-light); padding-top: 60px; padding-bottom: 60px;">
+        <h2 class="section-title" style="margin-bottom: 50px;">NUESTRO PROPÓSITO</h2>
+        <div class="services-grid"
+            style="max-width: 1000px; margin: 0 auto; gap: 40px; display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));">
+
+            <!-- Misión -->
+            <div class="service-card" style="padding: 50px 40px;">
+                <i class="fa-solid fa-bullseye"
+                    style="font-size: 3.5rem; background: linear-gradient(135deg, var(--primary-blue), var(--accent-cyan)); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 25px;"></i>
+                <h3
+                    style="font-family: 'Montserrat', sans-serif; font-size: 1.8rem; color: var(--secondary-medium-blue); margin-bottom: 20px; font-weight: 600;">
+                    Misión</h3>
+                <p style="font-size: 1.05rem; color: var(--text-main); line-height: 1.8; text-align: justify;">
+                    Garantizar a nuestros clientes el suministro de productos y servicios de calidad de manera integral,
+                    con la más alta tecnología en materia de ingeniería, construcción, mantenimiento y servicios en
+                    general, contando para ello con el recurso humano debidamente capacitado, el cual permite responder
+                    de manera oportuna, eficaz y eficiente, a fines de satisfacer las necesidades del cliente y
+                    caracterizarnos como empresa líder en dichas áreas.
+                </p>
+            </div>
+
+            <!-- Visión -->
+            <div class="service-card" style="padding: 50px 40px;">
+                <i class="fa-solid fa-eye"
+                    style="font-size: 3.5rem; background: linear-gradient(135deg, var(--primary-blue), var(--accent-cyan)); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 25px;"></i>
+                <h3
+                    style="font-family: 'Montserrat', sans-serif; font-size: 1.8rem; color: var(--secondary-medium-blue); margin-bottom: 20px; font-weight: 600;">
+                    Visión</h3>
+                <p style="font-size: 1.05rem; color: var(--text-main); line-height: 1.8; text-align: justify;">
+                    Expandir nuestros servicios en todo el mercado de la industria Petrolera, además de continuar
+                    ofreciendo la más alta calidad, utilización eficiente del recurso humano y tecnológico,
+                    confiabilidad, experiencia, innovación y compromiso, en todos los productos y servicios que
+                    disponemos, premisa que nos diferencia de otras empresas.
+                </p>
+            </div>
+
+        </div>
+    </section>
+    <hr
+        style="border: none; height: 1px; background: linear-gradient(to right, transparent, var(--medium-gray), transparent); margin: 0 auto 60px; width: 80%;">
+
+
+
+
+
+    <!-- Services Section (Sección Rellenable 3) -->
+    <section class="section" id="services">
+        <h2 class="section-title">NUESTROS SERVICIOS</h2>
+        <div class="services-grid">
+            <div class="service-card">
+                <i class="fa-solid fa-truck-ramp-box"></i>
+                <h3>Transporte de Maquinaria Pesada</h3>
+                <p>Movilizamos equipos de construcción, agrícolas e industriales de gran tamaño con la seguridad y
+                    eficiencia que su proyecto requiere.</p>
+            </div>
+            <div class="service-card">
+                <i class="fa-solid fa-car-side"></i>
+                <h3>Transporte de Vehículos</h3>
+                <p>Servicio de traslado de vehículos particulares, comerciales y de flota, garantizando su entrega en
+                    perfecto estado.</p>
+            </div>
+            <div class="service-card">
+                <i class="fa-solid fa-bolt"></i>
+                <h3>Tendido de Guayas Eléctricas</h3>
+                <p>Expertos en la instalación y mantenimiento de redes eléctricas, asegurando conexiones seguras y
+                    funcionales para su infraestructura.</p>
+            </div>
+            <div class="service-card">
+                <i class="fa-solid fa-screwdriver-wrench"></i>
+                <h3>Mantenimiento y Logística</h3>
+                <p>Ofrecemos servicios de mantenimiento preventivo y correctivo, además de soluciones logísticas para
+                    optimizar sus operaciones.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Our Fleet Section -->
+    <section class="section" id="fleet">
+        <h2 class="section-title">NUESTRA FLOTA</h2>
+        <p class="section-intro-text">Contamos con una extensa y moderna flota de vehículos pesados y especializados,
+            listos para cualquier desafío operativo. Desde camiones grúa hasta bateas extendibles, garantizamos
+            resultados óptimos bajo un estricto programa de mantenimiento.</p>
+
+        <!-- Fleet Grid List -->
+        <div
+            style="max-width: 1000px; margin: 0 auto 50px; display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px;">
+            <div style="background-color: var(--surface-white); padding: 20px 25px; border-radius: 12px; box-shadow: var(--shadow-sm); display: flex; align-items: center; gap: 15px; border: 1px solid rgba(0,0,0,0.03); transition: all 0.3s ease;"
+                onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='var(--shadow-md)'; this.style.borderColor='var(--accent-cyan)'"
+                onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='var(--shadow-sm)'; this.style.borderColor='rgba(0,0,0,0.03)'">
+                <i class="fa-solid fa-users"
+                    style="color: var(--accent-cyan); font-size: 1.5rem; width: 30px; text-align: center;"></i>
+                <span style="font-weight: 600; color: var(--primary-dark); font-size: 0.95rem;">Unidades Livianas para
+                    el transporte del personal</span>
+            </div>
+            <div style="background-color: var(--surface-white); padding: 20px 25px; border-radius: 12px; box-shadow: var(--shadow-sm); display: flex; align-items: center; gap: 15px; border: 1px solid rgba(0,0,0,0.03); transition: all 0.3s ease;"
+                onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='var(--shadow-md)'; this.style.borderColor='var(--accent-cyan)'"
+                onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='var(--shadow-sm)'; this.style.borderColor='rgba(0,0,0,0.03)'">
+                <i class="fa-solid fa-truck-pickup"
+                    style="color: var(--accent-cyan); font-size: 1.5rem; width: 30px; text-align: center;"></i>
+                <span style="font-weight: 600; color: var(--primary-dark); font-size: 0.95rem;">Camiones Cestas
+                    Hidráulicas</span>
+            </div>
+            <div style="background-color: var(--surface-white); padding: 20px 25px; border-radius: 12px; box-shadow: var(--shadow-sm); display: flex; align-items: center; gap: 15px; border: 1px solid rgba(0,0,0,0.03); transition: all 0.3s ease;"
+                onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='var(--shadow-md)'; this.style.borderColor='var(--accent-cyan)'"
+                onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='var(--shadow-sm)'; this.style.borderColor='rgba(0,0,0,0.03)'">
+                <i class="fa-solid fa-fire-burner"
+                    style="color: var(--accent-cyan); font-size: 1.5rem; width: 30px; text-align: center;"></i>
+                <span style="font-weight: 600; color: var(--primary-dark); font-size: 0.95rem;">Camiones 350 con
+                    Máquinas de Soldar y Oxicorte</span>
+            </div>
+            <div style="background-color: var(--surface-white); padding: 20px 25px; border-radius: 12px; box-shadow: var(--shadow-sm); display: flex; align-items: center; gap: 15px; border: 1px solid rgba(0,0,0,0.03); transition: all 0.3s ease;"
+                onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='var(--shadow-md)'; this.style.borderColor='var(--accent-cyan)'"
+                onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='var(--shadow-sm)'; this.style.borderColor='rgba(0,0,0,0.03)'">
+                <i class="fa-solid fa-truck-moving"
+                    style="color: var(--accent-cyan); font-size: 1.5rem; width: 30px; text-align: center;"></i>
+                <span style="font-weight: 600; color: var(--primary-dark); font-size: 0.95rem;">Chuto / Lowboy /
+                    Bateas</span>
+            </div>
+            <div style="background-color: var(--surface-white); padding: 20px 25px; border-radius: 12px; box-shadow: var(--shadow-sm); display: flex; align-items: center; gap: 15px; border: 1px solid rgba(0,0,0,0.03); transition: all 0.3s ease;"
+                onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='var(--shadow-md)'; this.style.borderColor='var(--accent-cyan)'"
+                onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='var(--shadow-sm)'; this.style.borderColor='rgba(0,0,0,0.03)'">
+                <i class="fa-solid fa-truck-front"
+                    style="color: var(--accent-cyan); font-size: 1.5rem; width: 30px; text-align: center;"></i>
+                <span style="font-weight: 600; color: var(--primary-dark); font-size: 0.95rem;">Camiones 750 con Brazo
+                    Articulado</span>
+            </div>
+            <div style="background-color: var(--surface-white); padding: 20px 25px; border-radius: 12px; box-shadow: var(--shadow-sm); display: flex; align-items: center; gap: 15px; border: 1px solid rgba(0,0,0,0.03); transition: all 0.3s ease;"
+                onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='var(--shadow-md)'; this.style.borderColor='var(--accent-cyan)'"
+                onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='var(--shadow-sm)'; this.style.borderColor='rgba(0,0,0,0.03)'">
+                <i class="fa-solid fa-truck"
+                    style="color: var(--accent-cyan); font-size: 1.5rem; width: 30px; text-align: center;"></i>
+                <span style="font-weight: 600; color: var(--primary-dark); font-size: 0.95rem;">Grúas de 15, 30 y 75
+                    Toneladas</span>
+            </div>
+            <div style="background-color: var(--surface-white); padding: 20px 25px; border-radius: 12px; box-shadow: var(--shadow-sm); display: flex; align-items: center; gap: 15px; border: 1px solid rgba(0,0,0,0.03); transition: all 0.3s ease;"
+                onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='var(--shadow-md)'; this.style.borderColor='var(--accent-cyan)'"
+                onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='var(--shadow-sm)'; this.style.borderColor='rgba(0,0,0,0.03)'">
+                <i class="fa-solid fa-tractor"
+                    style="color: var(--accent-cyan); font-size: 1.5rem; width: 30px; text-align: center;"></i>
+                <span style="font-weight: 600; color: var(--primary-dark); font-size: 0.95rem;">Retroexcavadoras</span>
+            </div>
+            <div style="background-color: var(--surface-white); padding: 20px 25px; border-radius: 12px; box-shadow: var(--shadow-sm); display: flex; align-items: center; gap: 15px; border: 1px solid rgba(0,0,0,0.03); transition: all 0.3s ease;"
+                onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='var(--shadow-md)'; this.style.borderColor='var(--accent-cyan)'"
+                onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='var(--shadow-sm)'; this.style.borderColor='rgba(0,0,0,0.03)'">
+                <i class="fa-solid fa-snowplow"
+                    style="color: var(--accent-cyan); font-size: 1.5rem; width: 30px; text-align: center;"></i>
+                <span style="font-weight: 600; color: var(--primary-dark); font-size: 0.95rem;">Tractor de Cadenas
+                    D6R</span>
+            </div>
+        </div>
+
+        <div class="elegant-carousel" id="fleetCarousel">
+            <div class="elegant-carousel-track">
+                <div class="elegant-carousel-slide"><img src="images/flota/1.jpg" alt="Flota 1"></div>
+                <div class="elegant-carousel-slide"><img src="images/flota/2.jpg" alt="Flota 2"></div>
+                <div class="elegant-carousel-slide"><img src="images/flota/3.jpg" alt="Flota 3"></div>
+                <div class="elegant-carousel-slide"><img src="images/flota/4.jpg" alt="Flota 4"></div>
+                <div class="elegant-carousel-slide"><img src="images/flota/5.jpg" alt="Flota 5"></div>
+                <div class="elegant-carousel-slide"><img src="images/flota/6.jpg" alt="Flota 6"></div>
+                <div class="elegant-carousel-slide"><img src="images/flota/7.jpg" alt="Flota 7"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section class="section" id="projects">
+        <h2 class="section-title">PROYECTOS DESTACADOS</h2>
+        <p class="section-intro-text">Hemos participado en las mayores obras y operaciones logísticas a nivel nacional.
+            Nuestra trayectoria demuestra la capacidad resolutiva, precisión y excelencia que dedicamos a cada
+            movilización de alto perfil.</p>
+
+        <!-- Projects Grid List -->
+        <div
+            style="max-width: 1100px; margin: 0 auto 50px; display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 20px;">
+            <div style="background-color: var(--surface-white); padding: 20px 25px; border-radius: 12px; box-shadow: var(--shadow-sm); display: flex; align-items: flex-start; gap: 15px; border: 1px solid rgba(0,0,0,0.03); transition: all 0.3s ease;"
+                onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='var(--shadow-md)'; this.style.borderColor='var(--accent-cyan)'"
+                onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='var(--shadow-sm)'; this.style.borderColor='rgba(0,0,0,0.03)'">
+                <i class="fa-solid fa-bolt"
+                    style="color: var(--accent-cyan); font-size: 1.5rem; width: 35px; text-align: center; margin-top: 2px;"></i>
+                <span
+                    style="font-weight: 600; color: var(--primary-dark); font-size: 0.95rem; line-height: 1.4;">Mantenimiento
+                    de redes e instalaciones eléctricas de baja y media tensión desde 480 V hasta 34.500 V en la Cuenca
+                    Occidente</span>
+            </div>
+            <div style="background-color: var(--surface-white); padding: 20px 25px; border-radius: 12px; box-shadow: var(--shadow-sm); display: flex; align-items: flex-start; gap: 15px; border: 1px solid rgba(0,0,0,0.03); transition: all 0.3s ease;"
+                onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='var(--shadow-md)'; this.style.borderColor='var(--accent-cyan)'"
+                onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='var(--shadow-sm)'; this.style.borderColor='rgba(0,0,0,0.03)'">
+                <i class="fa-solid fa-tower-observation"
+                    style="color: var(--accent-cyan); font-size: 1.5rem; width: 35px; text-align: center; margin-top: 2px;"></i>
+                <span
+                    style="font-weight: 600; color: var(--primary-dark); font-size: 0.95rem; line-height: 1.4;">Mantenimiento
+                    mayor y recuperación del corredor de servicio de los circuitos de transmisión A y B a nivel de 115
+                    KV en la Cuenca Occidente</span>
+            </div>
+            <div style="background-color: var(--surface-white); padding: 20px 25px; border-radius: 12px; box-shadow: var(--shadow-sm); display: flex; align-items: flex-start; gap: 15px; border: 1px solid rgba(0,0,0,0.03); transition: all 0.3s ease;"
+                onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='var(--shadow-md)'; this.style.borderColor='var(--accent-cyan)'"
+                onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='var(--shadow-sm)'; this.style.borderColor='rgba(0,0,0,0.03)'">
+                <i class="fa-solid fa-building-circle-check"
+                    style="color: var(--accent-cyan); font-size: 1.5rem; width: 35px; text-align: center; margin-top: 2px;"></i>
+                <span
+                    style="font-weight: 600; color: var(--primary-dark); font-size: 0.95rem; line-height: 1.4;">Servicio
+                    de mantenimiento civil en edificaciones</span>
+            </div>
+            <div style="background-color: var(--surface-white); padding: 20px 25px; border-radius: 12px; box-shadow: var(--shadow-sm); display: flex; align-items: flex-start; gap: 15px; border: 1px solid rgba(0,0,0,0.03); transition: all 0.3s ease;"
+                onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='var(--shadow-md)'; this.style.borderColor='var(--accent-cyan)'"
+                onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='var(--shadow-sm)'; this.style.borderColor='rgba(0,0,0,0.03)'">
+                <i class="fa-solid fa-temperature-arrow-up"
+                    style="color: var(--accent-cyan); font-size: 1.5rem; width: 35px; text-align: center; margin-top: 2px;"></i>
+                <span
+                    style="font-weight: 600; color: var(--primary-dark); font-size: 0.95rem; line-height: 1.4;">Mantenimiento,
+                    servicio y reparación de calentadores y calderas</span>
+            </div>
+            <div style="background-color: var(--surface-white); padding: 20px 25px; border-radius: 12px; box-shadow: var(--shadow-sm); display: flex; align-items: flex-start; gap: 15px; border: 1px solid rgba(0,0,0,0.03); transition: all 0.3s ease;"
+                onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='var(--shadow-md)'; this.style.borderColor='var(--accent-cyan)'"
+                onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='var(--shadow-sm)'; this.style.borderColor='rgba(0,0,0,0.03)'">
+                <i class="fa-solid fa-gauge-high"
+                    style="color: var(--accent-cyan); font-size: 1.5rem; width: 35px; text-align: center; margin-top: 2px;"></i>
+                <span
+                    style="font-weight: 600; color: var(--primary-dark); font-size: 0.95rem; line-height: 1.4;">Servicio
+                    de adecuación integral de los sistemas de instrumentación para sistema de tratamiento térmico de
+                    patio de tanques</span>
+            </div>
+            <div style="background-color: var(--surface-white); padding: 20px 25px; border-radius: 12px; box-shadow: var(--shadow-sm); display: flex; align-items: flex-start; gap: 15px; border: 1px solid rgba(0,0,0,0.03); transition: all 0.3s ease;"
+                onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='var(--shadow-md)'; this.style.borderColor='var(--accent-cyan)'"
+                onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='var(--shadow-sm)'; this.style.borderColor='rgba(0,0,0,0.03)'">
+                <i class="fa-solid fa-plug-circle-check"
+                    style="color: var(--accent-cyan); font-size: 1.5rem; width: 35px; text-align: center; margin-top: 2px;"></i>
+                <span
+                    style="font-weight: 600; color: var(--primary-dark); font-size: 0.95rem; line-height: 1.4;">Restauración
+                    integral de los sistemas eléctricos y de instrumentación de calentadores</span>
+            </div>
+            <div style="background-color: var(--surface-white); padding: 20px 25px; border-radius: 12px; box-shadow: var(--shadow-sm); display: flex; align-items: flex-start; gap: 15px; border: 1px solid rgba(0,0,0,0.03); transition: all 0.3s ease;"
+                onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='var(--shadow-md)'; this.style.borderColor='var(--accent-cyan)'"
+                onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='var(--shadow-sm)'; this.style.borderColor='rgba(0,0,0,0.03)'">
+                <i class="fa-solid fa-lightbulb"
+                    style="color: var(--accent-cyan); font-size: 1.5rem; width: 35px; text-align: center; margin-top: 2px;"></i>
+                <span
+                    style="font-weight: 600; color: var(--primary-dark); font-size: 0.95rem; line-height: 1.4;">Restitución
+                    de sistema de iluminación, control de acceso y obras menores en patio de tanques</span>
+            </div>
+            <div style="background-color: var(--surface-white); padding: 20px 25px; border-radius: 12px; box-shadow: var(--shadow-sm); display: flex; align-items: flex-start; gap: 15px; border: 1px solid rgba(0,0,0,0.03); transition: all 0.3s ease;"
+                onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='var(--shadow-md)'; this.style.borderColor='var(--accent-cyan)'"
+                onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='var(--shadow-sm)'; this.style.borderColor='rgba(0,0,0,0.03)'">
+                <i class="fa-solid fa-water"
+                    style="color: var(--accent-cyan); font-size: 1.5rem; width: 35px; text-align: center; margin-top: 2px;"></i>
+                <span
+                    style="font-weight: 600; color: var(--primary-dark); font-size: 0.95rem; line-height: 1.4;">Reemplazo
+                    de tuberías sublacustre</span>
+            </div>
+            <div style="background-color: var(--surface-white); padding: 20px 25px; border-radius: 12px; box-shadow: var(--shadow-sm); display: flex; align-items: flex-start; gap: 15px; border: 1px solid rgba(0,0,0,0.03); transition: all 0.3s ease;"
+                onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='var(--shadow-md)'; this.style.borderColor='var(--accent-cyan)'"
+                onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='var(--shadow-sm)'; this.style.borderColor='rgba(0,0,0,0.03)'">
+                <i class="fa-solid fa-cloud-bolt"
+                    style="color: var(--accent-cyan); font-size: 1.5rem; width: 35px; text-align: center; margin-top: 2px;"></i>
+                <span
+                    style="font-weight: 600; color: var(--primary-dark); font-size: 0.95rem; line-height: 1.4;">Restitución
+                    del Sistema Contra Descargas Atmosféricas y Puesta a Tierra en Instalaciones de Flujo</span>
+            </div>
+            <div style="background-color: var(--surface-white); padding: 20px 25px; border-radius: 12px; box-shadow: var(--shadow-sm); display: flex; align-items: flex-start; gap: 15px; border: 1px solid rgba(0,0,0,0.03); transition: all 0.3s ease;"
+                onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='var(--shadow-md)'; this.style.borderColor='var(--accent-cyan)'"
+                onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='var(--shadow-sm)'; this.style.borderColor='rgba(0,0,0,0.03)'">
+                <i class="fa-solid fa-leaf"
+                    style="color: var(--accent-cyan); font-size: 1.5rem; width: 35px; text-align: center; margin-top: 2px;"></i>
+                <span
+                    style="font-weight: 600; color: var(--primary-dark); font-size: 0.95rem; line-height: 1.4;">Mantenimiento
+                    de Áreas Verdes y Ornato en Plantas</span>
+            </div>
+        </div>
+
+        <div class="elegant-carousel" id="projectsCarousel">
+            <div class="elegant-carousel-track">
+                <div class="elegant-carousel-slide"><img src="images/proyectos/1.jpg" alt="Proyecto 1"></div>
+                <div class="elegant-carousel-slide"><img src="images/proyectos/2.jpg" alt="Proyecto 2"></div>
+                <div class="elegant-carousel-slide"><img src="images/proyectos/3.jpg" alt="Proyecto 3"></div>
+                <div class="elegant-carousel-slide"><img src="images/proyectos/4.jpg" alt="Proyecto 4"></div>
+                <div class="elegant-carousel-slide"><img src="images/proyectos/5.jpg" alt="Proyecto 5"></div>
+                <div class="elegant-carousel-slide"><img src="images/proyectos/6.jpg" alt="Proyecto 6"></div>
+                <div class="elegant-carousel-slide"><img src="images/proyectos/7.jpg" alt="Proyecto 7"></div>
+                <div class="elegant-carousel-slide"><img src="images/proyectos/8.jpg" alt="Proyecto 8"></div>
+            </div>
+        </div>
+    </section>
+
+
+
+    <!-- Certifications and Associations Section -->
+    <section class="section" id="certifications">
+        <h2 class="section-title">CERTIFICACIONES Y ASOCIACIONES</h2>
+        <div class="certifications-grid">
+            <div class="certification-item">
+                <img src="https://via.placeholder.com/100x100/e9ecef/343a40?text=ISO+9001" alt="Certificación ISO 9001">
+                <p>Certificación ISO 9001</p>
+            </div>
+            <div class="certification-item">
+                <img src="https://via.placeholder.com/100x100/e9ecef/343a40?text=Asociacion"
+                    alt="Miembro de Asociación Gremial">
+                <p>Miembro de [Nombre de Asociación]</p>
+            </div>
+            <div class="certification-item">
+                <img src="https://via.placeholder.com/100x100/e9ecef/343a40?text=Seguridad"
+                    alt="Certificación de Seguridad Ocupacional">
+                <p>Certificación de Seguridad Ocupacional</p>
+            </div>
+            <!-- Añade más logos y descripciones aquí -->
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="section" id="faq">
+        <h2 class="section-title">PREGUNTAS FRECUENTES</h2>
+        <div class="faq-container">
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>¿Qué tipo de maquinaria pesada transportan?</span>
+                    <span class="icon"><i class="fas fa-chevron-down"></i></span>
+                </div>
+                <div class="faq-answer">
+                    <p>Transportamos una amplia gama de maquinaria pesada, incluyendo excavadoras, bulldozers, grúas,
+                        cargadores frontales, equipos de minería, y más. Adaptamos nuestros remolques y logística a las
+                        dimensiones y peso de cada equipo.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>¿Ofrecen servicios de transporte a nivel nacional?</span>
+                    <span class="icon"><i class="fas fa-chevron-down"></i></span>
+                </div>
+                <div class="faq-answer">
+                    <p>Sí, nuestra cobertura de transporte de maquinaria pesada y vehículos abarca todo el territorio
+                        nacional. Contamos con la experiencia y los permisos necesarios para operar en diversas
+                        regiones.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>¿Cómo puedo solicitar un presupuesto?</span>
+                    <span class="icon"><i class="fas fa-chevron-down"></i></span>
+                </div>
+                <div class="faq-answer">
+                    <p>Puede solicitar un presupuesto a través de nuestro formulario de contacto en la sección
+                        "Contáctenos", enviándonos un correo electrónico a info@translag.com, o llamándonos directamente
+                        a nuestro número de teléfono. Le responderemos a la brevedad.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>¿Qué medidas de seguridad implementan en el transporte?</span>
+                    <span class="icon"><i class="fas fa-chevron-down"></i></span>
+                </div>
+                <div class="faq-answer">
+                    <p>La seguridad es nuestra máxima prioridad. Implementamos protocolos estrictos que incluyen
+                        inspecciones pre-viaje, amarre y sujeción adecuados de la carga, monitoreo constante, y
+                        conductores altamente capacitados y certificados. Cumplimos con todas las normativas de
+                        seguridad vial y de transporte de carga.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>¿Realizan tendido de guayas eléctricas en zonas rurales o de difícil acceso?</span>
+                    <span class="icon"><i class="fas fa-chevron-down"></i></span>
+                </div>
+                <div class="faq-answer">
+                    <p>Sí, contamos con equipos y personal especializado para realizar tendido de guayas eléctricas en
+                        todo tipo de terrenos, incluyendo zonas rurales, montañosas o de difícil acceso. Realizamos un
+                        estudio previo para garantizar la viabilidad y seguridad del proyecto.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>¿Ofrecen servicio de transporte de vehículos particulares?</span>
+                    <span class="icon"><i class="fas fa-chevron-down"></i></span>
+                </div>
+                <div class="faq-answer">
+                    <p>Sí, además de flotas comerciales, ofrecemos transporte seguro y confiable para vehículos
+                        particulares, ya sea por reubicación, compra/venta, o cualquier otra necesidad. Nos aseguramos
+                        de que su vehículo llegue a destino en las mismas condiciones en que fue recogido.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>¿Tienen seguro para la carga transportada?</span>
+                    <span class="icon"><i class="fas fa-chevron-down"></i></span>
+                </div>
+                <div class="faq-answer">
+                    <p>Sí, todas nuestras operaciones de transporte están cubiertas por pólizas de seguro de carga que
+                        protegen sus bienes contra posibles eventualidades durante el traslado. La tranquilidad de
+                        nuestros clientes es fundamental para nosotros.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>¿Pueden manejar proyectos de gran envergadura o a largo plazo?</span>
+                    <span class="icon"><i class="fas fa-chevron-down"></i></span>
+                </div>
+                <div class="faq-answer">
+                    <p>Absolutamente. TRANSLAG está equipada y organizada para gestionar proyectos de transporte y
+                        servicios de cualquier escala, desde traslados individuales hasta operaciones logísticas
+                        complejas y contratos a largo plazo. Contáctenos para discutir los detalles de su proyecto.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Choose Us Section (Sección Rellenable 4) -->
+    <section class="section" id="why-choose-us">
+        <h2 class="section-title">¿POR QUÉ ELEGIRNOS?</h2>
+        <div class="why-choose-us-grid">
+            <div class="advantage-card">
+                <h3><i class="fa-solid fa-shield-alt"></i> Seguridad Garantizada</h3>
+                <p>Priorizamos la seguridad en cada operación, cumpliendo con todas las normativas y utilizando equipos
+                    de protección.</p>
+            </div>
+            <div class="advantage-card">
+                <h3><i class="fa-solid fa-clock"></i> Puntualidad y Eficiencia</h3>
+                <p>Nos comprometemos a entregar sus cargas y completar proyectos en los tiempos acordados, sin demoras.
+                </p>
+            </div>
+            <div class="advantage-card">
+                <h3><i class="fa-solid fa-handshake"></i> Atención Personalizada</h3>
+                <p>Ofrecemos soluciones a medida para cada cliente, adaptándonos a sus necesidades específicas.</p>
+            </div>
+            <div class="advantage-card">
+                <h3><i class="fa-solid fa-star"></i> Experiencia Comprobada</h3>
+                <p>Contamos con un historial exitoso y la confianza de numerosos clientes satisfechos en el sector.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="section" id="contact">
+        <h2 class="section-title">CONTÁCTENOS</h2>
+        <div class="contact-content">
+            <div class="contact-info">
+                <h3>Información de Contacto</h3>
+                <p>Estamos listos para atender sus requerimientos y ofrecerle la mejor solución.</p>
+                <ul>
+                    <li><i class="fa-solid fa-map-marker-alt"></i> Dirección: Av. Intercomunal entre Carret. J y Calle
+                        Petrolago, casa s/n, sector Libertad, Ciudad Ojeda, estado Zulia, Venezuela.</li>
+                    <li><i class="fa-solid fa-phone"></i> Teléfono: +58 414-6757557, +58414-6592524 </li>
+                    <li><i class="fa-solid fa-envelope"></i> Email: Translagoca@gmail.com, finanzas.translag@gmail.com
+                    </li>
+                    <li><i class="fa-solid fa-clock"></i> Horario: Lunes a Viernes, 8:00 AM - 5:00 PM</li>
+                </ul>
+            </div>
+            <div class="contact-form">
+                <h3>Solicite un Presupuesto</h3>
+                <!-- Formulario configurado con FormSubmit para enviar directo al correo solicitado -->
+                <form action="https://formsubmit.co/Translagoca@gmail.com" method="POST">
+
+                    <!-- FormSubmit Configuration -->
+                    <!-- Disable Captcha for better UX -->
+                    <input type="hidden" name="_captcha" value="false">
+                    <!-- Redirection to the same page with a success parameter (optional but good practice) -->
+                    <!-- In this case, FormSubmit will show a default clean success page if no 'next' is provided -->
+                    <input type="hidden" name="_subject" value="¡Nuevo Presupuesto Solicitado desde la Web TRANSLAG!">
+                    <input type="hidden" name="_template" value="table"> <!-- Sends the email in a nice table format -->
+
+                    <label for="name">Nombre Completo:</label>
+                    <input type="text" id="name" name="name" required>
+
+                    <label for="email">Correo Electrónico:</label>
+                    <input type="email" id="email" name="email" required>
+
+                    <label for="phone">Teléfono:</label>
+                    <input type="tel" id="phone" name="phone">
+
+                    <label for="service">Servicio de Interés:</label>
+                    <select id="service" name="service">
+                        <option value="Transporte de Maquinaria Pesada">Transporte de Maquinaria Pesada</option>
+                        <option value="Transporte de Vehículos">Transporte de Vehículos</option>
+                        <option value="Tendido de Guayas Eléctricas">Tendido de Guayas Eléctricas</option>
+                        <option value="Otro">Otro</option>
+                    </select>
+
+                    <label for="message">Mensaje / Detalles del Proyecto:</label>
+                    <textarea id="message" name="message" required></textarea>
+
+                    <button type="submit">ENVIAR SOLICITUD</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Google Map Embed -->
+        <div style="margin-top: 60px; border-radius: 20px; overflow: hidden; box-shadow: var(--shadow-md);">
+            <iframe
+                src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d9339.201386933191!2d-71.33780469113482!3d10.209012382321642!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1ses!2sve!4v1772936887752!5m2!1ses!2sve"
+                width="100%" height="400" style="border:0;" allowfullscreen="" loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="#home">Inicio</a>
+                <a href="#about">Quiénes Somos</a>
+                <a href="#values">Valores</a>
+                <a href="#services">Servicios</a>
+                <a href="#fleet">Nuestra Flota</a>
+                <a href="#projects">Proyectos</a>
+                <a href="#testimonials">Testimonios</a>
+                <a href="#certifications">Certificaciones</a>
+                <a href="#faq">FAQ</a>
+                <a href="#contact">Contacto</a>
+            </div>
+            <p>&copy; 2023 TRANSPORTES Y SERVICIOS LAGO C.A (TRANSLAG). Todos los derechos reservados.</p>
+            <div class="social-links">
+                <a href="#" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Floating CTA Button -->
+    <a href="#contact" class="floating-cta">
+        <i class="fa-solid fa-phone"></i> Contactar
+    </a>
+
+    <!-- Floating Chatbot Button -->
+    <button id="openChatbot" class="floating-chatbot-button">
+        <i class="fas fa-comments"></i> Chat IA
+    </button>
+
+    <!-- Chatbot Container -->
+    <!-- Floating WhatsApp Button -->
+    <a href="https://wa.me/584121059439" target="_blank" class="floating-whatsapp-button">
+        <i class="fab fa-whatsapp"></i> Chat WhatsApp
+    </a>
+
+    <!-- Styles for WhatsApp Button -->
+    <style>
+        .floating-whatsapp-button {
+            position: fixed;
+            bottom: 90px;
+            right: 30px;
+            background-color: #25D366;
+            color: #fff;
+            padding: 12px 20px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4);
+            transition: all 0.3s ease;
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .floating-whatsapp-button:hover {
+            transform: translateY(-3px);
+            background-color: #20BA5A;
+            box-shadow: 0 8px 20px rgba(37, 211, 102, 0.6);
+        }
+
+        .floating-cta {
+            /* Adjust existing floating CTA if needed, maybe hide it if WhatsApp is better or keep both */
+            bottom: 30px;
+            right: 30px;
+        }
+
+        @media (max-width: 768px) {
+            .floating-whatsapp-button {
+                bottom: 80px;
+                right: 20px;
+                padding: 10px 15px;
+                font-size: 0.9rem;
+            }
+
+            .floating-cta {
+                bottom: 20px;
+                right: 20px;
+            }
+
+            .floating-chatbot-button {
+                bottom: 20px;
+                left: 20px;
+            }
+        }
+    </style>
+
+    <div id="chatbotContainer" class="chatbot-container">
+        <div class="chatbot-header">
+            <h3>Asistente TRANSLAG</h3>
+            <button id="closeChatbot" class="close-chatbot-button">&times;</button>
+        </div>
+        <div class="chatbot-messages" id="chatbotMessages">
+            <!-- Mensajes del chat se insertarán aquí -->
+            <div class="message bot-message">Hola, ¿en qué puedo ayudarte hoy?</div>
+        </div>
+        <div class="chatbot-input">
+            <input type="text" id="chatbotInput" placeholder="Escribe tu mensaje...">
+            <button id="sendMessage"><i class="fas fa-paper-plane"></i></button>
+        </div>
+    </div>
+
+    <script>
+        // Smooth Scrolling for Anchor Links
+        document.querySelectorAll('nav a[href^="#"], .floating-cta[href^="#"], .cta-button[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Optional: Add a simple fade-in animation for sections on scroll
+        const sections = document.querySelectorAll('.section');
+        const animatedItems = document.querySelectorAll('.service-card, .value-item, .project-item, .fleet-card, .testimonial-card, .advantage-card');
+
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.1
+        };
+
+
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate-in'); // Añade la clase para la animación
+                    observer.unobserve(entry.target); // Deja de observar una vez animado
+                }
+            });
+        }, observerOptions);
+
+        sections.forEach(section => {
+            // No establecer opacidad y transform aquí, la clase animate-in lo hará
+            observer.observe(section);
+        });
+
+        // Add stagger effect to items
+        animatedItems.forEach((item, index) => {
+            item.style.opacity = '0';
+            item.style.transform = 'translateY(20px)';
+            item.style.transition = 'all 0.6s ease-out';
+            observer.observe(item);
+        });
+
+        // Override the observer for items to add delay
+        const itemObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    // Calculate index within its container to stagger
+                    const parent = entry.target.parentElement;
+                    const children = Array.from(parent.children);
+                    const index = children.indexOf(entry.target);
+                    const delay = Math.min(index * 30, 300); // Faster ripple, capped at 300ms
+
+                    setTimeout(() => {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }, delay);
+
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        animatedItems.forEach(item => {
+            itemObserver.observe(item);
+        });
+
+        // Header scroll effect (optional: make header smaller on scroll)
+        // Header scroll effect (optional: make header smaller on scroll)
+        // Header scroll effect (optional: make header smaller on scroll)
+        const header = document.querySelector('header');
+        const logoImg = document.querySelector('.logo img');
+
+        window.addEventListener('scroll', () => {
+            const scrollY = window.scrollY;
+            if (scrollY > 50) {
+                header.classList.add('scrolled');
+                header.style.padding = '12px 0'; /* Slightly larger padding */
+                header.style.background = '#003366'; /* Solid blue color on scroll, overrides gradient */
+                header.style.backdropFilter = 'none'; /* No blur needed on solid */
+                header.style.webkitBackdropFilter = 'none';
+                header.style.boxShadow = '0 4px 6px -1px rgba(0, 0, 0, 0.1)';
+                logoImg.style.height = '55px'; /* Slightly larger logo on scroll */
+                header.style.borderBottom = '1px solid rgba(255, 255, 255, 0.1)';
+            } else {
+                header.classList.remove('scrolled');
+                header.style.padding = '10px 0'; /* Larger padding at top */
+                header.style.background = 'linear-gradient(to bottom, rgba(0,0,0,0.8) 0%, transparent 100%)'; /* Restore gradient */
+                header.style.backdropFilter = 'none'; /* Clear glass */
+                header.style.webkitBackdropFilter = 'blur(0px)';
+                header.style.boxShadow = 'none';
+                logoImg.style.height = '70px'; /* Larger logo at top */
+                header.style.borderBottom = 'none'; /* No border at top */
+            }
+        });
+
+        // Elegant Carousel Class (Unified Logic for all Carousels)
+        class ElegantCarousel {
+            constructor(carouselElement) {
+                this.carousel = carouselElement;
+                this.track = this.carousel.querySelector('.elegant-carousel-track');
+                this.slides = Array.from(this.track.children);
+                if (this.slides.length === 0) return; // No slides
+
+                this.currentSlide = 0;
+                this.autoPlayInterval = null;
+                this.autoPlayDelay = 4000; // 4 seconds
+
+                // Touch/Swipe properties
+                this.touchStartX = 0;
+                this.touchEndX = 0;
+
+                this.init();
+            }
+
+            init() {
+                this.createNavigation();
+                this.createDots();
+                this.updateUI();
+                this.addEventListeners();
+                this.startAutoPlay();
+            }
+
+            createNavigation() {
+                if (this.slides.length <= 1) return;
+
+                this.prevButton = document.createElement('button');
+                this.prevButton.classList.add('ec-nav-button', 'ec-prev');
+                this.prevButton.innerHTML = '&#10094;';
+
+                this.nextButton = document.createElement('button');
+                this.nextButton.classList.add('ec-nav-button', 'ec-next');
+                this.nextButton.innerHTML = '&#10095;';
+
+                this.carousel.appendChild(this.prevButton);
+                this.carousel.appendChild(this.nextButton);
+            }
+
+            createDots() {
+                if (this.slides.length <= 1) return;
+
+                this.dotsContainer = document.createElement('div');
+                this.dotsContainer.classList.add('ec-dots-container');
+
+                this.dots = this.slides.map((_, index) => {
+                    const dot = document.createElement('div');
+                    dot.classList.add('ec-dot');
+                    dot.dataset.index = index;
+                    this.dotsContainer.appendChild(dot);
+                    return dot;
+                });
+
+                this.carousel.appendChild(this.dotsContainer);
+            }
+
+            updateUI() {
+                // Update track position
+                this.track.style.transform = `translateX(-${this.currentSlide * 100}%)`;
+
+                // Update dots
+                if (this.dots) {
+                    this.dots.forEach((dot, index) => {
+                        dot.classList.toggle('active', index === this.currentSlide);
+                    });
+                }
+            }
+
+            goToSlide(index) {
+                if (index < 0) {
+                    this.currentSlide = this.slides.length - 1;
+                } else if (index >= this.slides.length) {
+                    this.currentSlide = 0;
+                } else {
+                    this.currentSlide = index;
+                }
+                this.updateUI();
+            }
+
+            next() {
+                this.goToSlide(this.currentSlide + 1);
+            }
+
+            prev() {
+                this.goToSlide(this.currentSlide - 1);
+            }
+
+            startAutoPlay() {
+                this.stopAutoPlay();
+                if (this.slides.length > 1) {
+                    // Usar bind(this) o arrow function para no perder el contexto
+                    this.autoPlayInterval = setInterval(() => this.next(), this.autoPlayDelay);
+                }
+            }
+
+            stopAutoPlay() {
+                if (this.autoPlayInterval) {
+                    clearInterval(this.autoPlayInterval);
+                }
+            }
+
+            handleSwipe() {
+                const swipeThreshold = 50; // minimum distance to be considered a swipe
+                const swipeDistance = this.touchEndX - this.touchStartX;
+                if (Math.abs(swipeDistance) > swipeThreshold) {
+                    if (swipeDistance > 0) {
+                        this.prev(); // swipe right
+                    } else {
+                        this.next(); // swipe left
+                    }
+                }
+            }
+
+            addEventListeners() {
+                if (this.slides.length <= 1) return;
+
+                // Buttons
+                this.prevButton.addEventListener('click', () => {
+                    this.prev();
+                    this.startAutoPlay(); // Reset timer on manual action
+                });
+
+                this.nextButton.addEventListener('click', () => {
+                    this.next();
+                    this.startAutoPlay();
+                });
+
+                // Dots
+                this.dots.forEach(dot => {
+                    dot.addEventListener('click', () => {
+                        this.goToSlide(parseInt(dot.dataset.index));
+                        this.startAutoPlay();
+                    });
+                });
+
+                // Pause on hover
+                this.carousel.addEventListener('mouseenter', () => this.stopAutoPlay());
+                this.carousel.addEventListener('mouseleave', () => this.startAutoPlay());
+
+                // Touch/Swipe Support
+                this.carousel.addEventListener('touchstart', (e) => {
+                    this.touchStartX = e.changedTouches[0].screenX;
+                    this.stopAutoPlay();
+                }, { passive: true });
+
+                this.carousel.addEventListener('touchend', (e) => {
+                    this.touchEndX = e.changedTouches[0].screenX;
+                    this.handleSwipe();
+                    this.startAutoPlay();
+                }, { passive: true });
+            }
+        }
+
+        // Initialize Carousels on load
+        document.addEventListener('DOMContentLoaded', () => {
+            const carousels = document.querySelectorAll('.elegant-carousel');
+            carousels.forEach(carouselEl => {
+                new ElegantCarousel(carouselEl);
+            });
+        });
+
+        // Hamburger Menu Toggle Functionality
+        document.addEventListener('DOMContentLoaded', () => {
+            const mobileMenu = document.getElementById('mobile-menu');
+            const navMenu = document.querySelector('nav');
+            const navLinks = document.querySelectorAll('.nav-menu a');
+
+            // Prevent scrolling on body when menu is open
+            const toggleScroll = (isActive) => {
+                if (isActive) {
+                    document.body.style.overflow = 'hidden';
+                } else {
+                    document.body.style.overflow = '';
+                }
+            };
+
+            mobileMenu.addEventListener('click', () => {
+                mobileMenu.classList.toggle('is-active');
+                navMenu.classList.toggle('active');
+                toggleScroll(mobileMenu.classList.contains('is-active'));
+            });
+
+            // Close menu when clicking a link
+            navLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.remove('is-active');
+                    navMenu.classList.remove('active');
+                    toggleScroll(false);
+                });
+            });
+        });
+
+        /* Removed Stats Counter Animation */
+
+        // FAQ Accordion Logic
+        document.addEventListener('DOMContentLoaded', () => {
+            const faqQuestions = document.querySelectorAll('.faq-question');
+            faqQuestions.forEach(question => {
+                question.addEventListener('click', () => {
+                    const item = question.parentElement;
+                    const isActive = item.classList.contains('active');
+
+                    // Close all other items (optional, but requested for standard accordion)
+                    document.querySelectorAll('.faq-item').forEach(otherItem => {
+                        otherItem.classList.remove('active');
+                    });
+
+                    // Toggle current item
+                    if (!isActive) {
+                        item.classList.add('active');
+                    }
+                });
+            });
+        });
+
+        // Hero Particles Animation
+        const canvas = document.getElementById('hero-particles');
+        if (canvas) {
+            const ctx = canvas.getContext('2d');
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight; // Full height
+
+            let particlesArray;
+
+            class Particle {
+                constructor() {
+                    this.x = Math.random() * canvas.width;
+                    this.y = Math.random() * canvas.height;
+                    this.directionX = (Math.random() * 0.4) - 0.2; // Slower speed
+                    this.directionY = (Math.random() * 0.4) - 0.2;
+                    this.size = (Math.random() * 2) + 1; // Smaller particles
+                    this.color = 'rgba(255, 255, 255, 0.3)'; // Transparent white
+                }
+
+                update() {
+                    if (this.x > canvas.width || this.x < 0) {
+                        this.directionX = -this.directionX;
+                    }
+                    if (this.y > canvas.height || this.y < 0) {
+                        this.directionY = -this.directionY;
+                    }
+                    this.x += this.directionX;
+                    this.y += this.directionY;
+                }
+
+                draw() {
+                    ctx.beginPath();
+                    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2, false);
+                    ctx.fillStyle = this.color;
+                    ctx.fill();
+                }
+            }
+
+            function init() {
+                particlesArray = [];
+                let numberOfParticles = (canvas.height * canvas.width) / 15000; // Density
+                for (let i = 0; i < numberOfParticles; i++) {
+                    particlesArray.push(new Particle());
+                }
+            }
+
+            function animate() {
+                requestAnimationFrame(animate);
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+                for (let i = 0; i < particlesArray.length; i++) {
+                    particlesArray[i].update();
+                    particlesArray[i].draw();
+
+                    // Draw connections
+                    for (let j = i; j < particlesArray.length; j++) {
+                        const dx = particlesArray[i].x - particlesArray[j].x;
+                        const dy = particlesArray[i].y - particlesArray[j].y;
+                        const distance = Math.sqrt(dx * dx + dy * dy);
+
+                        if (distance < 100) {
+                            ctx.beginPath();
+                            ctx.strokeStyle = 'rgba(255, 255, 255, ' + (1 - distance / 100) * 0.1 + ')'; // Very subtle lines
+                            ctx.lineWidth = 1;
+                            ctx.moveTo(particlesArray[i].x, particlesArray[i].y);
+                            ctx.lineTo(particlesArray[j].x, particlesArray[j].y);
+                            ctx.stroke();
+                        }
+                    }
+                }
+            }
+
+            window.addEventListener('resize', () => {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+                init();
+            });
+
+            init();
+            animate();
+        }
+
+
+        // 3D Tilt Effect Implementation
+        const tiltCards = document.querySelectorAll('.service-card, .fleet-card, .project-item');
+
+        tiltCards.forEach(card => {
+            card.classList.add('tilt-card'); // Mark for styling if needed
+
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left; // x position within the element
+                const y = e.clientY - rect.top;  // y position within the element
+
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+
+                const rotateX = ((y - centerY) / centerY) * -5; // Max 5deg tilt X (inverted)
+                const rotateY = ((x - centerX) / centerX) * 5;  // Max 5deg tilt Y
+
+                card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.02)`;
+            });
+
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) scale(1)';
+                card.style.transition = 'transform 0.5s ease-out'; // Smooth return
+            });
+
+            card.addEventListener('mouseenter', () => {
+                card.style.transition = 'none'; // Instant movement on enter for responsiveness
+            });
+        });
+
+        // Preloader Logic
+        window.addEventListener('load', () => {
+            document.body.classList.add('loaded');
+        });
+
+
+
+        // Chatbot Functionality
+        document.addEventListener('DOMContentLoaded', () => {
+            const openChatbotBtn = document.getElementById('openChatbot');
+            const closeChatbotBtn = document.getElementById('closeChatbot');
+            const chatbotContainer = document.getElementById('chatbotContainer');
+            const chatbotMessages = document.getElementById('chatbotMessages');
+            const chatbotInput = document.getElementById('chatbotInput');
+            const sendMessageBtn = document.getElementById('sendMessage');
+
+            openChatbotBtn.addEventListener('click', () => {
+                chatbotContainer.classList.add('active');
+            });
+
+            closeChatbotBtn.addEventListener('click', () => {
+                chatbotContainer.classList.remove('active');
+            });
+
+            sendMessageBtn.addEventListener('click', sendMessage);
+            chatbotInput.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') {
+                    sendMessage();
+                }
+            });
+
+            function sendMessage() {
+                const userMessage = chatbotInput.value.trim();
+                if (userMessage === '') return;
+
+                appendMessage(userMessage, 'user-message');
+                chatbotInput.value = '';
+                simulateBotResponse(userMessage);
+            }
+
+            function appendMessage(text, type) {
+                const messageDiv = document.createElement('div');
+                messageDiv.classList.add('message', type);
+                messageDiv.textContent = text;
+                chatbotMessages.appendChild(messageDiv);
+                chatbotMessages.scrollTop = chatbotMessages.scrollHeight; // Scroll al final
+            }
+
+            function simulateBotResponse(userMessage) {
+                let botResponse = "Lo siento, no entendí tu pregunta. ¿Puedes intentar con otras palabras o preguntar por nuestros servicios, flota o contacto?";
+                const msg = userMessage.toLowerCase();
+
+                // Lógica de respuesta mejorada
+                if (msg.includes('hola') || msg.includes('saludos') || msg.includes('buenos dias') || msg.includes('buenas tardes')) {
+                    botResponse = "¡Hola! Bienvenido a TRANSLAG. Soy tu asistente virtual inteligente. ¿En qué puedo ayudarte hoy? Puedes preguntarme sobre:";
+                    setTimeout(() => {
+                        appendMessage("🔹 Servicios de transporte\n🔹 Nuestra flota\n🔹 Presupuestos\n🔹 Ubicación y contacto", 'bot-message');
+                    }, 800);
+                }
+                else if (msg.includes('servicios') || msg.includes('hacen') || msg.includes('ofrecen')) {
+                    botResponse = "En TRANSLAG nos especializamos en soluciones logísticas integrales:";
+                    setTimeout(() => {
+                        appendMessage("✅ Transporte de Maquinaria Pesada\n✅ Transporte de Vehículos\n✅ Tendido de Guayas Eléctricas\n✅ Alquiler de Grúas y Equipos", 'bot-message');
+                    }, 800);
+                }
+                else if (msg.includes('flota') || msg.includes('vehiculos') || msg.includes('camiones') || msg.includes('gruas')) {
+                    botResponse = "Contamos con una flota moderna y diversa de marcas líderes como Ford, Chevrolet, Iveco y Caterpillar. Tenemos grúas de hasta 75 toneladas, camiones cesta, gandolas y plataformas lowboy para cualquier tipo de carga.";
+                }
+                else if (msg.includes('presupuesto') || msg.includes('cotización') || msg.includes('costo') || msg.includes('precio')) {
+                    botResponse = "Cada proyecto es único. Para darte un presupuesto exacto, necesitamos detalles de la carga, origen y destino. Por favor, ve a la sección de 'Contacto' y llena el formulario, o llámanos directamente.";
+                }
+                else if (msg.includes('contacto') || msg.includes('telefono') || msg.includes('correo') || msg.includes('email') || msg.includes('llamar')) {
+                    botResponse = "Estamos a tu disposición:\n📞 Teléfono: +58 412-1059439\n📧 Email: info@translag.com\n📍 También puedes usar el formulario en esta página.";
+                }
+                else if (msg.includes('ubicacion') || msg.includes('donde estan') || msg.includes('direccion')) {
+                    botResponse = "Nuestra sede principal se encuentra en [Ciudad/Región]. Operamos a nivel nacional en todo el territorio venezolano.";
+                }
+                else if (msg.includes('horario') || msg.includes('abierto')) {
+                    botResponse = "Nuestro horario de atención administrativa es de Lunes a Viernes, de 8:00 AM a 5:00 PM. Sin embargo, para operaciones logísticas programadas, trabajamos 24/7.";
+                }
+                else if (msg.includes('gracias') || msg.includes('chao') || msg.includes('adios')) {
+                    botResponse = "¡De nada! Gracias por visitar TRANSLAG. Estamos aquí para mover tu mundo. ¡Que tengas un excelente día!";
+                }
+
+                setTimeout(() => {
+                    appendMessage(botResponse, 'bot-message');
+                }, 500); // Simula un pequeño retraso en la respuesta del bot
+            }
+        });
+    </script>
+</body>
+
+</html>
